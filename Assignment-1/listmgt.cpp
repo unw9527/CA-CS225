@@ -54,7 +54,7 @@ int main()
     }
     cout << "\n";
     cout << "Delete 3 elements:\nThe original list contains: ";
-    AList<int> mylist4;
+    AList<double> mylist4;
     for (int i = 0; i < 6; i++){
         mylist4.append(i);
         cout << i << " ";
@@ -110,7 +110,6 @@ int main()
         cout << mylist7[i] << " ";
     }
     cout << "\n";
-
 
     // cout << "Delete\nThe original list contains: ";
     // AList<int> mylist8;
