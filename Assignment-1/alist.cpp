@@ -188,7 +188,6 @@ template<class T> bool AList<T>::equal(AList<T> &list)
         result = false;
     return result;
 }
-
 template<class T> bool AList<T>::sublist(AList<T> &list)
 {
     int length = list.getlength();
@@ -214,3 +213,27 @@ template<class T> bool AList<T>::sublist(AList<T> &list)
     }
     return result;
 }
+template<class T>void AList<T>::selectionSort(void){	//Sort in ascending order
+	for(int i=0;i<numitems;i++){
+		int minn=reprarray[i],min_id=i;
+		for(int j=i+1;j<numitems;j++){
+			if(minn>reprarray[j]){
+				minn=reprarray[j];
+				min_id=j;
+			}
+		}
+		reprarray[min_id]=reprarray[i];
+		reprarray[i]=minn;
+	}
+} 
+template<class T>void AList<T>::bubbleSort(void){	//Sort in ascending order
+	for(int i=0;i<numitems-1;i++){
+		for(int j=0;j<numitems-i-1;j++){
+			if(reprarray[j]>=reprarray[j+1]){
+				int t=reprarray[j];
+				reprarray[j]=reprarray[j+1];
+				reprarray[j+1]=t;
+			}
+		}
+	}
+} 

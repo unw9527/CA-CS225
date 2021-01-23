@@ -25,7 +25,8 @@ public:
     bool equal(AList<T> &list);
     bool sublist(AList<T> &list);
     void delete_last_k(int k);
-    
+    void selectionSort(void);
+    void bubbleSort(void);
 private:
     int maxsize, minsize;
     int numitems;
