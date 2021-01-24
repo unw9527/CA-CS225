@@ -19,8 +19,6 @@ using std::cin;
  * Description: delete the last k elements from AList as required in Assignment 1.1
  */
 template<class T> void AList<T>::delete_last_k(int k){
-    if ((numitems == maxsize / 4) && (maxsize > minsize))
-        deallocate(); 
     if (k < 1){
         cout << "Invalid number of elements deleted!\n";
         return;
@@ -28,11 +26,12 @@ template<class T> void AList<T>::delete_last_k(int k){
     if (k <= numitems)
     {
         numitems -= k; // decrease the number of items if k <= numitems
-        return;
     }
     else{
         numitems = 0; // set the list length to 0 if k > numitems
     }
+    while ((numitems <= maxsize / 4) && (maxsize > minsize))
+        deallocate(); 
 }
 
 template<class T> T &AList<T>::operator[](int index)
@@ -214,6 +213,7 @@ template<class T> bool AList<T>::sublist(AList<T> &list)
     return result;
 }
 
+
 //Problem 2.4
 /* Function: src(e,f,g,l)
  * Input: T_t e,T_t (*f)(T_t),T_t (*g)(T_t,T_t),AList<T> &list
@@ -247,7 +247,8 @@ template<typename T_t>T_t AList<T>::src(T_t e,T_t (*f)(T_t),T_t (*g)(T_t,T_t),AL
  */
 template<class T>void AList<T>::selectionSort(void){ 	//Sort in ascending order
 	for(int i=0;i<numitems;i++){ 	//use for loop to search through all the elements
-    	int minn=reprarray[i],min_id=i;  	//initialize minn and min_id
+    	T minn=reprarray[i];
+		int min_id=i;  	//initialize minn and min_id
   		for(int j=i+1;j<numitems;j++){	 //use for loop
    			if(minn>reprarray[j]){  	//if there is one element smaller than minn
     			minn=reprarray[j];	 //let minn be that element
@@ -269,7 +270,7 @@ template<class T>void AList<T>::bubbleSort(void){ 	//Sort in ascending order
 	for(int i=0;i<numitems-1;i++){ 	//use for loop to search through all the elements
     	for(int j=0;j<numitems-i-1;j++){  	//use for loop to search the rest elements
        		if(reprarray[j]>=reprarray[j+1]){  	//if j-th element is bigger than the j+1-th
-        	int t=reprarray[j];
+        	T t=reprarray[j];
         	reprarray[j]=reprarray[j+1];
         	reprarray[j+1]=t;  	//swap them 
             }

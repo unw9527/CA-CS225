@@ -27,6 +27,8 @@ public:
     void delete_last_k(int k);
     void selectionSort(void);
     void bubbleSort(void);
+    template<typename T_t>T_t src(T_t e,T_t (*f)(T_t),T_t (*g)(T_t,T_t),AList<T> &list);
+
 private:
     int maxsize, minsize;
     int numitems;
