@@ -107,6 +107,70 @@ int main()
     }
     cout << "\n";
 
+
+    cout << "Test cases for selection sort:\n";
+    
+    cout << "Do selection sort for an descending integer list:\nThe original list contains: ";
+    AList<int> listselect;
+    for (int i=6; i>=0; i--) {
+    	listselect.append(i); // Use this loop to build a descending list.
+    	cout << i << " ";
+	}
+	cout << "\n";
+	listselect.selectionSort(); // Do the bubble sort using implemented function.
+	numitems = listselect.getlength(); // Get the length of the new list.
+	cout << "New list:";
+	for (int i=1; i<=numitems; i++) {
+		cout << listselect[i] << " ";
+	}
+	cout << "\n";
+	cout << "Do selection sort for an descending double list:\nThe original list contains: ";
+	AList<double> listselect1;
+    for (double i=1.98; i>=1.82; i-=0.02) {
+    	listselect1.append(i); // Use this loop to build a descending list.
+    	cout << i << " ";
+	}
+	cout << "\n";
+	listselect1.selectionSort(); // Do the bubble sort using implemented function.
+	numitems = listselect1.getlength(); // Get the length of the new list.
+	cout << "New list:";
+	for (int i=1; i<=numitems; i++) {
+		cout << listselect1[i] << " ";
+	}
+	cout << "\n";
+	
+	
+	cout << "\n" << "Test cases for bubble sort:\n";
+    
+    cout << "Do bubble sort for an descending integer list:\nThe original list contains: ";
+    AList<int> listbubble;
+    for (int i=9; i>=1; i--) {
+    	listbubble.append(i); // Use this loop to build a descending list.
+    	cout << i << " ";
+	}
+	cout << "\n";
+	listbubble.bubbleSort(); // Do the selection sort using implemented function.
+	numitems = listbubble.getlength(); // Get the length of the new list.
+	cout << "New list:";
+	for (int i=1; i<=numitems; i++) {
+		cout << listbubble[i] << " ";
+	}
+	cout << "\n";
+	cout << "Do bubble sort for an descending double list:\nThe original list contains: ";
+	AList<double> listbubble1;
+    for (double i=3.5; i>=3.1; i-=0.05) {
+    	listbubble1.append(i); // Use this loop to build a descending list.
+    	cout << i << " ";
+	}
+	cout << "\n";
+	listbubble1.bubbleSort(); // Do the selection sort using implemented function.
+	numitems = listbubble1.getlength(); // Get the length of the new list.
+	cout << "New list:";
+	for (int i=1; i<=numitems; i++) {
+		cout << listbubble1[i] << " ";
+	}
+	cout << "\n";
+
     
     return(0);
 }
