@@ -51,7 +51,7 @@ int main()
     cout << "\n";
     cout << "Delete 3 elements:\nThe original list contains: ";
     AList<double> mylist4;
-    for (int i = 0; i < 6; i++){
+    for (double i = 0.01; i < 6.08; i = i + 1.01){
         mylist4.append(i); // print out the original list
         cout << i << " ";
     }
@@ -206,7 +206,7 @@ int main()
 	}
 	cout << "\n" << "\n";
     
-	// Test case for Ex.3
+	// Test cases for Ex.3
 	int lenlist; // Added to get the length of list.
 	CList<int> newlist1;
 	CList<double> newlist2;

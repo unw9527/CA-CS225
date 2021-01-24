@@ -36,7 +36,7 @@ int main()
 	cout << "\n";
 	listinsert.insertionSort(); // Do the insertion sort using implemented function.
 	numitems = listinsert.getlength(); // Get the length of the new list.
-	cout << "New list:";
+	cout << "New list: ";
 	for (int i=1; i<=numitems; i++) {
 		cout << listinsert[i] << " ";
 	}
@@ -53,7 +53,7 @@ int main()
 	cout << "\n";
 	listinsert1.insertionSort(); // Do the insertion sort using implemented function.
 	numitems = listinsert1.getlength(); // Get the length of the new list.
-	cout << "New list:";
+	cout << "New list: ";
 	for (int i=1; i<=numitems; i++) {
 		cout << listinsert1[i] << " ";
 	}
@@ -74,7 +74,7 @@ int main()
 	cout << "\n";
 	listbubble.bubbleSort(); // Do the bubble sort using implemented function.
 	numitems = listbubble.getlength(); // Get the length of the new list.
-	cout << "New list:";
+	cout << "New list: ";
 	for (int i=1; i<=numitems; i++) {
 		cout << listbubble[i] << " ";
 	}
@@ -91,7 +91,7 @@ int main()
 	cout << "\n";
 	listbubble1.bubbleSort(); // Do the bubble sort using implemented function.
 	numitems = listbubble1.getlength(); // Get the length of the new list.
-	cout << "New list:";
+	cout << "New list: ";
 	for (int i=1; i<=numitems; i++) {
 		cout << listbubble1[i] << " ";
 	}
