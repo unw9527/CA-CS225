@@ -28,10 +28,6 @@ public:
     void selectionSort(void);
     void bubbleSort(void);
     template<typename T_t>T_t src(T_t e,T_t (*f)(T_t),T_t (*g)(T_t,T_t),AList<T> &list);
-    void pushback(T x);
-    void pushfront(T x);
-    void popback(void);
-    void popfront(void);
 
 private:
     int maxsize, minsize;
@@ -40,7 +36,6 @@ private:
     void allocate(void);
     void deallocate(void); //usage < 25%, 
 };
-
 template<class T> AList<T>::AList(int size)
 {
     maxsize = size;
@@ -49,6 +44,38 @@ template<class T> AList<T>::AList(int size)
     else
         minsize = 20;
     numitems = 0;
+    reprarray = new T[maxsize];
+}
+/*--------------------------------------*/
+template<class T> class CList   //here is a new class for Ex.3
+{
+public:
+    CList(int size = 20);
+//    virtual ~AList();
+    T &operator[](int index);
+    int getlength(void);
+    void pushback(T x);
+    void pushfront(T x);
+    T popback(void);
+    T popfront(void);
+//above is public function
+private:
+    int maxsize, minsize,fi_id,la_id;
+    int numitems;
+    T *reprarray;
+    void allocate(void);
+    void deallocate(void); //usage < 25%, 
+//above is private function
+};
+template<class T> CList<T>::CList(int size)	//here is the constructed function fo CList
+{
+    maxsize = size;
+    if (size < 20)
+        minsize = size;
+    else
+        minsize = 20;
+    numitems = 0;
+    fi_id=la_id=size/2;
     reprarray = new T[maxsize];
 }
 

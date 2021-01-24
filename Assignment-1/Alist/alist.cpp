@@ -238,9 +238,144 @@ template<typename T_t>T_t AList<T>::src(T_t e,T_t (*f)(T_t),T_t (*g)(T_t,T_t),AL
 		l2.append(list.reprarray[i]);	//use for loop to let l1 be a sublist of l, and l1+l2=l
 	return g(src(e,f,g,l1),src(e,f,g,l2));	//then just return g
 }
-
+/*-----------------------------------------------------------------------------*/
 //Problem 3
+/* Function: getlength()
+ * Input: none
+ * Output: none
+ * Return value: numitems
+ * Description: get the numitems of CList
+ */
+template<class T> int CList<T>::getlength(void)	  //get the numitems of CList, that's the length
+{
+    return numitems;
+}
+/* Function: operator[](int index)
+ * Input: index
+ * Output: none
+ * Return value: reprarray[index - 1]
+ * Description: get the element 
+ */
+template<class T> T &CList<T>::operator[](int index)	//return the element in the index of the array
+{
+	index+=fi_id;
+    return reprarray[index - 1];
+}
+/* Function: allocate(void)	
+ * Input: none
+ * Output: none
+ * Return value: none
+ * Description: allocate for CList when there is no enough space
+ */
+template<class T> void CList<T>::allocate(void)		//it's the allocate function for CList
+{
+    int newsize = 2 * maxsize;
+    T *newarray = new T[newsize];
+    int n_fi_id=(newsize-numitems)/2;
+    int n_la_id=fi_id+numitems;		//initialize some new variables
+    for (int i = 0; i < numitems; ++i)
+    {
+        newarray[i+fi_id] = reprarray[i];	//create the newarray to include all the elements of reprarray
+    }
+    delete[] reprarray;		//delete the reprarray
+    reprarray = newarray;
+    maxsize = newsize;
+    fi_id=n_fi_id;
+    la_id=n_la_id;		//set new variables
+    return;
+}
+/* Function: deallocate(void)
+ * Input: none
+ * Output: none
+ * Return value: none
+ * Description: deallocate for CList when there is too much space
+ */
+template<class T> void CList<T>::deallocate(void)	//it's the deallocate function for CList
+{
+    int newsize = maxsize / 2;
+    T *newarray = new T[newsize];
+    int n_fi_id=(newsize-numitems)/2;
+    int n_la_id=fi_id+numitems;		//initialize some new variables
+    for (int i = 0; i < numitems; ++i)
+    {
+        newarray[i+n_fi_id] = reprarray[i+fi_id];  //create the newarray to include all the elements of reprarray
+    }
+    delete[] reprarray;   //delete the reprarray
+    reprarray = newarray;
+    maxsize = newsize;
+    fi_id=n_fi_id;
+    la_id=n_la_id;	//set new variables
+    return;
+}
+/* Function:pushback(T value)
+ * Input: T value
+ * Output: none
+ * Return value: none
+ * Description:  appends the element x at the end of the sequence
+ */
+template<class T>void CList<T>::pushback(T value){	//it's the pushback function for CList
+	if (la_id == maxsize)
+        allocate();		//if so, need to allocate
+    reprarray[la_id] = value;	//set value
+    la_id++;	//let la_id+1
+	numitems++;	//let numitems+1
+    return;
+}
+/* Function:pushback(T value)
+ * Input: T value
+ * Output: none
+ * Return value: none
+ * Description:  adds the element x at the front of the sequence
+ */
+template<class T>void CList<T>::pushfront(T value){		//it's the pushfront function for CList
+	if (fi_id == 0)
+        allocate();	//if so, need to allocate
+    reprarray[--fi_id] = value;	//set value and let fi_id-1
+    numitems++;		//let numitems+1
+    return;
+}
+/* Function:popback(void)
+ * Input: none
+ * Output: "Index error: The list is empty!\n" if the sequence is empty, none if not
+ * Return value: the last element x of the sequence
+ * Description:  removes the last element x of the sequence and returns it
+ */
+template<class T>T CList<T>::popback(void){			//it's the popback function for CList
+	if ((numitems == maxsize / 4) && (maxsize > minsize))
+        deallocate();	//if so, need to deallocate
+    if (numitems)
+    {
+    	la_id--;	//let la_id-1 first
+    	T e = reprarray[la_id];		//take the last one as e
+        numitems--;	//let numitems-1
+        return e;	//return e
+    }
+    else
+        cout << "Index error: The list is empty!\n";	//if failed, display this sentence
+        return 0;	//and return 0
+}
+/* Function:popfront(void)
+ * Input: none
+ * Output: "Index error: The list is empty!\n" if the sequence is empty, none if not
+ * Return value: the first element x of the sequence
+ * Description:   removes the first element x of the sequence and returns it
+ */
+template<class T>T CList<T>::popfront(void){		//it's the popfront function for CList
+	if ((numitems == maxsize / 4) && (maxsize > minsize))
+        deallocate();	//if so, need to deallocate
+    if (numitems)
+    {
+    	T e = reprarray[fi_id];		//take the first one as e
+        fi_id++;	//let fi_id-1
+        numitems--;
+        return e; //return e
+    }
+    else
+        cout << "Index error: The list is empty!\n";	//if failed, display this sentence
+        return 0;	//and return 0
+}
 
+/*-----------------------------------------------------------------------------*/
 /* Function: selectionSort
  * Input: none
  * Output: none
