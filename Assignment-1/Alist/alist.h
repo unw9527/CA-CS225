@@ -28,6 +28,10 @@ public:
     void selectionSort(void);
     void bubbleSort(void);
     template<typename T_t>T_t src(T_t e,T_t (*f)(T_t),T_t (*g)(T_t,T_t),AList<T> &list);
+    void pushback(T x);
+    void pushfront(T x);
+    void popback(void);
+    void popfront(void);
 
 private:
     int maxsize, minsize;

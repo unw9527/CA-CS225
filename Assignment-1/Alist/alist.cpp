@@ -239,6 +239,8 @@ template<typename T_t>T_t AList<T>::src(T_t e,T_t (*f)(T_t),T_t (*g)(T_t,T_t),AL
 	return g(src(e,f,g,l1),src(e,f,g,l2));	//then just return g
 }
 
+//Problem 3
+
 /* Function: selectionSort
  * Input: none
  * Output: none

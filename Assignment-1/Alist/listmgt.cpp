@@ -106,6 +106,29 @@ int main()
         cout << mylist7[i] << " ";
     }
     cout << "\n";
+    cout << "\n";
+
+    cout << "Test cases for problem 2.4: \n";
+    int e;
+    AList<int> mylist8;
+    // mylist8.append(100);
+    cout << "f(x) = x + 5 and g(x,y) = x + y\n";
+    cout << "operating on mylist1:\n"; // the following tests cover cases where the list is not empty
+    cout << "e = 0\nResult: ";
+    cout << mylist1.src(0,f_fun,g_fun,mylist1) << "\n";
+    cout << "e = -1\nResult: ";
+    cout << mylist1.src(-1,f_fun,g_fun,mylist1) << "\n";
+    cout << "e = 2\nResult: ";
+    cout << mylist1.src(2,f_fun,g_fun,mylist1) << "\n";
+    cout << "e = 1.5\nResult: ";
+    cout << mylist1.src(1.5,f_fun,g_fun,mylist1) << "\n" << "\n";
+
+    cout << "operating on an empty list:\n"; // the following tests cover cases where the list is empty 
+    cout << "e = 2\nResult: ";
+    cout << mylist8.src(2,f_fun,g_fun,mylist8) << "\n";
+    cout << "e = 1.5\nResult: ";
+    cout << mylist8.src(1.5,f_fun,g_fun,mylist8) << "\n";
+    cout << "\n";
 
 
     cout << "Test cases for selection sort:\n";
@@ -170,7 +193,5 @@ int main()
 		cout << listbubble1[i] << " ";
 	}
 	cout << "\n";
-
-    
     return(0);
 }
