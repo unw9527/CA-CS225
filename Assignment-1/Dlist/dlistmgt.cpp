@@ -24,12 +24,15 @@ int main()
     bool boolresult;
     cout << "Test cases for insertion sort:\n";
     
-    cout << "Do insertion sort for an descending integer list:\nThe original list contains: ";
+    cout << "Do insertion sort for an non-increasing integer list:\nThe original list contains: ";
     DList<int> listinsert;
     for (int i=6; i>=0; i--) {
-    	listinsert.append(i); // Use this loop to build a descending list.
+    	listinsert.append(i); // Use this loop to build a non-increasing list.
     	cout << i << " ";
 	}
+	int ei1=9;
+	listinsert.append(ei1);
+	cout << ei1 << " ";
 	cout << "\n";
 	listinsert.insertionSort(); // Do the insertion sort using implemented function.
 	numitems = listinsert.getlength(); // Get the length of the new list.
@@ -38,12 +41,15 @@ int main()
 		cout << listinsert[i] << " ";
 	}
 	cout << "\n";
-	cout << "Do insertion sort for an descending double list:\nThe original list contains: ";
+	cout << "Do insertion sort for an non-increasing double list:\nThe original list contains: ";
 	DList<double> listinsert1;
     for (double i=1.98; i>=1.82; i-=0.02) {
-    	listinsert1.append(i); // Use this loop to build a descending list.
+    	listinsert1.append(i); // Use this loop to build a non-increasing list.
     	cout << i << " ";
 	}
+	double ed1=1.85;
+	listinsert1.append(ed1);
+	cout << ed1 << " ";
 	cout << "\n";
 	listinsert1.insertionSort(); // Do the insertion sort using implemented function.
 	numitems = listinsert1.getlength(); // Get the length of the new list.
@@ -56,12 +62,15 @@ int main()
 	
 	cout << "\n" << "Test cases for bubble sort:\n";
     
-    cout << "Do bubble sort for an descending integer list:\nThe original list contains: ";
+    cout << "Do bubble sort for an non-increasing integer list:\nThe original list contains: ";
     DList<int> listbubble;
     for (int i=9; i>=1; i--) {
-    	listbubble.append(i); // Use this loop to build a descending list.
+    	listbubble.append(i); // Use this loop to build a non-increasing list.
     	cout << i << " ";
 	}
+	int ei2=11;
+	listbubble.append(ei2);
+	cout << ei2 << " ";
 	cout << "\n";
 	listbubble.bubbleSort(); // Do the bubble sort using implemented function.
 	numitems = listbubble.getlength(); // Get the length of the new list.
@@ -70,12 +79,15 @@ int main()
 		cout << listbubble[i] << " ";
 	}
 	cout << "\n";
-	cout << "Do bubble sort for an descending double list:\nThe original list contains: ";
+	cout << "Do bubble sort for an non-increasing double list:\nThe original list contains: ";
 	DList<double> listbubble1;
     for (double i=3.5; i>=3.1; i-=0.05) {
-    	listbubble1.append(i); // Use this loop to build a descending list.
+    	listbubble1.append(i); // Use this loop to build a non-increasing list.
     	cout << i << " ";
 	}
+	double ed2=3.13;
+	listbubble1.append(ed2);
+	cout << ed2 << " ";
 	cout << "\n";
 	listbubble1.bubbleSort(); // Do the bubble sort using implemented function.
 	numitems = listbubble1.getlength(); // Get the length of the new list.
