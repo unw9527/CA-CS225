@@ -237,53 +237,64 @@ template<class T> bool DList<T>::equal(DList<T> *dlist)
     }
     return result;
 }
-/*------------------------------------------*/
-template<class T> void DList<T>::insertionSort(void){
-	int l,r,mid,data;
-	for(int i=1;i<=numitems;i++){
-		node<T> *pt=locate(i);
-		data=pt->getdata();
-		l=1;r=i-1;
-		while(l<=r){
-			mid=(l+r)/2;
-			if(getitem(mid)>data)r=mid-1;
-			else l=mid+1;
+
+/* Function: insertionSort
+ * Input: none
+ * Output: none
+ * Return value: none
+ * Description: Use insertion sort to sort DList, and here it's in ascending order.
+ */
+template<class T> void DList<T>::insertionSort(void){ 	//Sort in ascending order
+	node<T> *pt1;
+	node<T> *pt2;	//initialize two nodes
+	int l,r,mid;    //initialize some variables
+	T data;		//initialize data
+	for(int i=1;i<=numitems;i++){  //use for loop
+		node<T> *pt=locate(i);   //initialize a pointer
+		data=pt->getdata();  //let data be pt->getdata
+		l=1;r=i-1;	 //let l=1;r=i-1
+		while(l<=r){	 //use while loop
+			mid=(l+r)/2;	 //initialize mid
+			if(getitem(mid)>data)r=mid-1;  //adjust r
+			else l=mid+1;   //adjust l
 		}
-		if(l==i)continue;
-		node<T> *pt1=locate(l);
-		node<T> *pt1_pre=pt1->getprevious();
-		node<T> *pt_ne=pt->getnext();
-		pt1_pre->setnext(pt);
-		pt1->setprevious(pt);
-		pt->setprevious(pt1_pre);
-		node<T> *pt2=locate(i-1);
-		pt2->setnext(pt_ne);
+		if(l==i)continue;  //if so, i-th is the smallest element among all the elements before it, skip it
+		pt1=locate(l);
+		pt->getprevious()->setnext(pt->getnext());
+		pt->getnext()->setprevious(pt->getprevious());
+		pt1->getprevious()->setnext(pt);
+		pt->setprevious(pt1->getprevious());
 		pt->setnext(pt1);
-		pt_ne->setprevious(pt2);
+		pt1->setprevious(pt);	 //set the next and previous of these elements
 	}
 	
 }
-/*------------------------------------------*/
-template<class T> void DList<T>::bubbleSort(void){
-	for(int i=1;i<=numitems-1;i++){
-		for(int j=1;j<=numitems-i-1;j++){
-			if(getitem(j)>=getitems(j+1)){
-				node<T> *pt1=locate(j);
-				node<T> *pt1_pre=pt1->getprevious();
-				node<T> *pt2=locate(j+1);
-				node<T> *pt2_ne=pt2->getnext();
+
+/* Function: bubbleSort
+ * Input: none
+ * Output: none
+ * Return value: none
+ * Description: Use bubble sort to sort DList, and here it's in ascending order.
+ */
+template<class T> void DList<T>::bubbleSort(void){ 	//Sort in ascending order
+	node<T> *pt1;
+	node<T> *pt2;	//initialize two nodes
+	for(int i=1;i<=numitems-1;i++){		//use for loop to search through all the elements
+		for(int j=1;j<=numitems-i;j++){		//use for loop to search through all the elements after i-th element
+			if(getitem(j)>=getitem(j+1)){ 	//if the previous one is not smaller than the next one,then swap them
+				pt1=locate(j);
+				pt2=locate(j+1);  //initilize pt1 and pt2
+				pt1->getprevious()->setnext(pt2);
+				pt2->getnext()->setprevious(pt1);
+				pt2->setprevious(pt1->getprevious());
 				pt1->setprevious(pt2);
-				pt1->setnext(pt2_ne);
-				pt2->setprevious(pt1_pre);
-				pt2->setnext(pt1);
-				pt1_pre->setnext(pt2);
-				pt2_ne->setprevious(pt1);
+				pt1->setnext(pt2->getnext());
+				pt2->setnext(pt1);   //set the next and previous of these elements
 			}
 		}
 	}
-	
 }
-/*------------------------------------------*/
+
 template<class T> bool DList<T>::sublist(DList<T> *dlist)
 {
     bool result = true;

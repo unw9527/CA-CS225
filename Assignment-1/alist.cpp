@@ -14,11 +14,13 @@ using std::cin;
 
 /* Function: delete_last_k
  * Input: int k
- * Output: none if k>=1, "Invalid number of elements deleted!\n" if k<1
+ * Output: none
  * Return value: none
  * Description: delete the last k elements from AList as required in Assignment 1.1
  */
 template<class T> void AList<T>::delete_last_k(int k){
+    if ((numitems == maxsize / 4) && (maxsize > minsize))
+        deallocate(); 
     if (k < 1){
         cout << "Invalid number of elements deleted!\n";
         return;
@@ -26,12 +28,11 @@ template<class T> void AList<T>::delete_last_k(int k){
     if (k <= numitems)
     {
         numitems -= k; // decrease the number of items if k <= numitems
+        return;
     }
     else{
         numitems = 0; // set the list length to 0 if k > numitems
     }
-    while ((numitems <= maxsize / 4) && (maxsize > minsize))
-        deallocate(); 
 }
 
 template<class T> T &AList<T>::operator[](int index)
@@ -213,14 +214,13 @@ template<class T> bool AList<T>::sublist(AList<T> &list)
     return result;
 }
 
+//Problem 2.4
 /* Function: src(e,f,g,l)
  * Input: T_t e,T_t (*f)(T_t),T_t (*g)(T_t,T_t),AList<T> &list
  * Output: none
  * Return value type: T_t
  * Description: when l is empty, return e;when l has one element, return f(x);when l has more elements, return g; just as required in Assignment 2
  */
-/*========================================================*/
-//Problem 2.4
 template<typename T_t>T_t f_fun(T_t x){
 	return (T_t)x+5;	//here is an example of f
 }
@@ -238,7 +238,7 @@ template<typename T_t>T_t AList<T>::src(T_t e,T_t (*f)(T_t),T_t (*g)(T_t,T_t),AL
 		l2.append(list.reprarray[i]);	//use for loop to let l1 be a sublist of l, and l1+l2=l
 	return g(src(e,f,g,l1),src(e,f,g,l2));	//then just return g
 }
-/*========================================================*/
+
 /* Function: selectionSort
  * Input: none
  * Output: none
@@ -258,6 +258,7 @@ template<class T>void AList<T>::selectionSort(void){ 	//Sort in ascending order
   		reprarray[i]=minn; 	//replace the smallest element with the i-th element
  	}
 } 
+
 /* Function: bubbleSort
  * Input: none
  * Output: none
@@ -274,4 +275,4 @@ template<class T>void AList<T>::bubbleSort(void){ 	//Sort in ascending order
             }
 		}
  	}
-} 
+}
