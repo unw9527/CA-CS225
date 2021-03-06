@@ -190,7 +190,7 @@ template<class T> void MaxHeap<T>::build_heap(AList<T> &array){
     //put your code below
     int length = array.getlength();
     for (int i = 1; i <= length; i++){
-        this->append(array[i]);// difference between array[i] and array.getitem?
+        this->append(array[i]);// difference between array[i] and array.getitem
     }
     for (int i = length/2; 0 < i; i--){
         this->sift_down(i, length); // call sift_down to build max-heap
@@ -274,9 +274,9 @@ int main(){
     max_heap_2.heap_sort(input_array_2);
     max_heap_2.print_elements();
 
-    // test type double --kunle
+    // test type double, and there is negative number --kunle
     cout << "\npart3 test\n";
-    double input_list_0[6] = {5.1, 3.8, 9.0, 46.1, 22, 91};
+    double input_list_0[6] = {5.1, 3.8, -9.0, 46.1, -22, 91};
     AList<double> input_array_0;
     for (int i=0; i<6; i++){
         input_array_0.append(input_list_0[i]);
@@ -285,6 +285,27 @@ int main(){
     max_heap_0.heap_sort(input_array_0);
     cout<< max_heap_0.max() << "\n\n";
     max_heap_0.print_elements();
+    
+    //test case for build max_heap for type double, including negative number
+    cout << "\npart4 test\n";
+    double input_list_3[20] = {55.4, 2, 3, 4, -15, 22, 9.1, 18, 9, 74.7, 37.2, 1.6, 79.1, 4.5, 3.2, 10.2, 4.1, 5.1, 6, 7};
+    AList<double> input_array_3;
+    for (int i=0; i<20; i++){
+        input_array_3.append(input_list_3[i]);
+    }
+    MaxHeap<double> max_heap_3;
+    max_heap_3.build_heap(input_array_3);
+    cout<< max_heap_3.max() << "\n\n";
+    max_heap_3.print_elements();
+    
+    //test case for empty array
+    cout << "\npart5 test\n";
+    double input_list_4[0] = {};
+    AList<double> input_array_4;
+    MaxHeap<double> max_heap_4;
+    max_heap_4.build_heap(input_array_4);
+    cout<< max_heap_4.max() << "\n\n";
+    max_heap_4.print_elements();
 
     return 0;
 }
