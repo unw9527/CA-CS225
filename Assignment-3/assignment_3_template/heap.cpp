@@ -281,7 +281,7 @@ int main(){
     max_heap_2.print_elements();
 
     // test type double, and there is negative number
-    cout << "\npart3 test: test type double, and there is negative number\n";
+    cout << "\npart3 test: test type double, and there are negative numbers\n";
     double input_list_0[6] = {5.1, 3.8, -9.0, 46.1, -22, 91};
     AList<double> input_array_0;
     for (int i=0; i<6; i++){
@@ -309,8 +309,20 @@ int main(){
     AList<double> input_array_4;
     MaxHeap<double> max_heap_4;
     max_heap_4.build_heap(input_array_4);
-    cout<< max_heap_4.max() << "\n\n";
     max_heap_4.print_elements();
+    
+    // test type float, and there are negative numbers 
+    cout << "\npart6 test: test case for float type, and there are negative numbers\n";
+    float input_list_5[6] = {51.5, 3.82, -9.0, -46.1, -2.2, 9.1};
+    AList<float> input_array_5;
+    for (int i=0; i<6; i++){
+        input_array_5.append(input_list_5[i]);
+    }
+    MaxHeap<float> max_heap_5;
+    max_heap_5.heap_sort(input_array_5);
+    cout<< max_heap_5.max() << "\n\n";
+    max_heap_5.print_elements();
+
 
     return 0;
 }
