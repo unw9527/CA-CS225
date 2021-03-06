@@ -189,6 +189,9 @@ template<class T> bool AList<T>::sublist(AList<T> &list)
 template<class T> void MaxHeap<T>::build_heap(AList<T> &array){
     //put your code below
     int length = array.getlength();
+    if (0 == length){
+        return;
+    }
     for (int i = 1; i <= length; i++){
         this->append(array[i]);// difference between array[i] and array.getitem
     }
@@ -219,6 +222,9 @@ template<class T> void MaxHeap<T>::sift_down(int i, int num_elements){
 template<class T> void MaxHeap<T>::heap_sort(AList<T> &array){
     //put your code below
     int length = array.getlength();
+    if (0 == length){
+        return;
+    }
     this->build_heap(array);
     for (int i = length; 0 < i; i--){
         this->swap(1, i); // swap the root node with the last node, and we do not consider the original root node anymore
@@ -274,8 +280,8 @@ int main(){
     max_heap_2.heap_sort(input_array_2);
     max_heap_2.print_elements();
 
-    // test type double, and there is negative number --kunle
-    cout << "\npart3 test\n";
+    // test type double, and there is negative number
+    cout << "\npart3 test: test type double, and there is negative number\n";
     double input_list_0[6] = {5.1, 3.8, -9.0, 46.1, -22, 91};
     AList<double> input_array_0;
     for (int i=0; i<6; i++){
@@ -283,11 +289,10 @@ int main(){
     }
     MaxHeap<double> max_heap_0;
     max_heap_0.heap_sort(input_array_0);
-    cout<< max_heap_0.max() << "\n\n";
     max_heap_0.print_elements();
     
     //test case for build max_heap for type double, including negative number
-    cout << "\npart4 test\n";
+    cout << "\npart4 test: test case for build max_heap for type double, including negative number\n";
     double input_list_3[20] = {55.4, 2, 3, 4, -15, 22, 9.1, 18, 9, 74.7, 37.2, 1.6, 79.1, 4.5, 3.2, 10.2, 4.1, 5.1, 6, 7};
     AList<double> input_array_3;
     for (int i=0; i<20; i++){
@@ -299,7 +304,7 @@ int main(){
     max_heap_3.print_elements();
     
     //test case for empty array
-    cout << "\npart5 test\n";
+    cout << "\npart5 test: test case for empty array\n";
     double input_list_4[0] = {};
     AList<double> input_array_4;
     MaxHeap<double> max_heap_4;

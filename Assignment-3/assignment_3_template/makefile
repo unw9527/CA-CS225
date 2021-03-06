@@ -14,7 +14,7 @@ $(TARGET): $(OBJS)
 	$(LD) -o $@ $^
 
 %.o:%.c
-	$(CC) -g -c $^
+	$(CC) -c $^
 
 clean:
 	rm -f $(OBJS) $(TARGET)
