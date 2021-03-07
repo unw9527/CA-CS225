@@ -51,7 +51,7 @@ class Bookings{
         // You may also add your own help function
         bool checkdemands();
         void quickSort_arr(int low, int high);
-        void quickSort_dep(int low, int high);
+        void quickSort_dep(int low, int high);		//declare two  functions
     private:
 
 };
@@ -116,22 +116,22 @@ void Bookings::quickSort_dep(int left, int right)
 // You may also add your own help function
 bool Bookings::checkdemands(){
     this->quickSort_arr(0, bks.size()); 
-    this->quickSort_dep(0, bks.size());
+    this->quickSort_dep(0, bks.size());		//use two functions
     int count = 0;
-    int ptr = 0;
-    for (long unsigned int i = 0; i < bks.size(); i++){
+    int ptr = 0;		//define two variables
+    for (long unsigned int i = 0; i < bks.size(); i++){		//use for loop
         
-        if (count > k){
+        if (count > k){		//use if judgement
             return 0;
         }
         count++;
-        if (bks[i].arrival >= bks[ptr].departure){
+        if (bks[i].arrival >= bks[ptr].departure){		//use if judgement
             count--;
             ptr++;
         }
     }
-    if (count > k){
-            return 0;
+    if (count > k){		//use if to determine the return value
+	          return 0;
     }
     return 1;
 };
