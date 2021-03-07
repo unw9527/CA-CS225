@@ -15,6 +15,12 @@
  * 
  */
 
+/*
+ * According to my TA, I assume that at the arrival the person will use a room,
+ * and at his departure he will NOT use a room.
+ * If he arrives and leaves on the same date, he does not use a room.
+ */
+
 #include <vector>
 #include <iostream>
 using namespace std;
