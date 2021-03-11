@@ -13,19 +13,40 @@ template<class T> int NumSet<T>::Check_Relation(vector<pair<int,int> > R){
         0: The binary relation R is not symmetric
         1: The binary relation R is symmetric
     */
-   int count = 0; // initialize a counter to record the number of symmetric pairs.
-   // count should be equal to the size of R if R is symmetric
+   int max = R[0].first;
    for (int i = 0; i < R.size(); i++){
-       for (int j = 0; j < R.size(); j++){
-           if ((R[i].first == R[j].second) && (R[i].second == R[j].first)){
-               count++; // if a pair is symmetric, increment count
-           }
+       if (max < R[i].first){
+           max = R[i].first;
        }
-   }
-   if (count != R.size()){
-       return 0; // if count is not equal to the size of R, then R is not symmetric
-   }
-   return 1;
+       if (max < R[i].second){
+           max = R[i].second;
+       }
+   } // find the max value to determine m for making unique hash value for each input
+   int m = max + 1;
+   int table1[m*m+m]={0};
+   int count = 0; // 0 if two pairs share the same hash value, 1 otherwise
+   for (int i = 0; i < R.size(); i++){
+       if (R[i].first == R[i].second){
+           continue; // if the first element in a pair is the same as the second, skip it
+       }
+        if (R[i].first > R[i].second){
+            int temp = R[i].first;
+            R[i].first = R[i].second;
+            R[i].second = temp;
+            // make sure the smaller element is put first in order to yield same hash value
+            // for symmetric pairs
+        }
+        int hashVal = R[i].second * m + R[i].first; // hash function
+        if (0 == table1[hashVal]){
+            table1[hashVal] = 1;
+            count++;
+        }
+        else if (1 == table1[hashVal]){
+            table1[hashVal] = 0;
+            count--;
+        }   
+    }
+    return (!count);
 };
 int main(){
     int Set_A[10]={1,2,3,4,5,6,7,8,9,10};
