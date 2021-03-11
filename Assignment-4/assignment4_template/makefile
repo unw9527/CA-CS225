@@ -4,7 +4,7 @@ LD = g++
 SRCS = $(wildcard *.cpp)
 OBJS = $(patsubst %cpp, %o, $(SRCS))
 
-TARGET = ex4-2
+TARGET = hw4
 
 .PHONY: all clean
 
