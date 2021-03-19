@@ -76,7 +76,7 @@ template<class T> int MultiSet<T>::getlength(void)
 //     }
 // }
 
-template<class T> void MultiSet<T>::pushback(T num)
+template<class T> void MultiSet<T>::insertion(T num)
 {
     int mark = 1;
     for (int i = 0; i < numitems; i++){
@@ -156,8 +156,12 @@ template<class T> void MultiSet<T>::deallocate(void)
 }
 
 
-template<class T> void pair<T>::print_pairs(){
-    cout << "(" << this->pair_t << "," << this->pair_n << ")" << endl;
+template<class T> void MultiSet<T>::print_pairs(){
+    for (int i = 0; i < this->getlength(); i++){
+        pair<T> p1 = this->reprarray[i];
+        cout << "(" << p1.get_t() << "," << p1.get_n() << ") ";
+    }
+    cout << endl;
 }
 
 

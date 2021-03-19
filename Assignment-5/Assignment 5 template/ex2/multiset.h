@@ -42,10 +42,10 @@ public:
     virtual ~MultiSet();
     pair<T> &operator[](int index);
     int getlength(void);
+    void print_pairs();
     // bool isempty(void);
     // pair<T> back(void);
     // pair<T> front(void);
-    void pushback(T num);
     // pair<T> popfront(void);
 
     void insertion(T num);
@@ -53,7 +53,7 @@ public:
     void retrieval();
 
     void setunion();
-    void intersection();
+    void intersection(T num);
     void difference();
     
 private:
