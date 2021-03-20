@@ -43,6 +43,8 @@ public:
     pair<T> &operator[](int index);
     int getlength(void);
     void print_pairs();
+    void remove_all(MultiSet<T>* set);
+    void append(pair<T> pair1);
     // bool isempty(void);
     // pair<T> back(void);
     // pair<T> front(void);
@@ -50,11 +52,11 @@ public:
 
     void insertion(T num);
     void deletion(T num);
-    void retrieval();
+    int retrieval(T num);
 
-    void setunion();
-    void intersection(T num);
-    void difference();
+    void setunion(MultiSet<T>* set1, MultiSet<T>* set2);
+    void intersection(MultiSet<T>* set1, MultiSet<T>* set2);
+    void difference(MultiSet<T>* set1, MultiSet<T>* set2);
     
 private:
     int maxsize, minsize;
