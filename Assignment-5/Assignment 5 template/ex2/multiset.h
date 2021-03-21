@@ -32,12 +32,7 @@ public:
     void setitem(int index, T value);
     T getitem(int index);
     void append(T value);
-    // void insert(int index, T value);
     void remove(int index);
-    // void concat(DList<T> *dlist);
-    // bool member(T value);
-    // bool equal(DList<T> *dlist);
-    // bool sublist(DList<T> *dlist);
     
 private:
     node<T> *dummy;
@@ -54,7 +49,6 @@ template<class T> class MChaining
 public:
     MChaining(int size = 10);
     virtual ~MChaining();
-    // pair<T> &operator[](int index);
     int getlength(void);
     void print_all(void);
     void pushback(DList<T> list1);
@@ -113,10 +107,6 @@ public:
     int getlength(void);
     void print_pairs();
     void append(pair<T> pair1);
-    // bool isempty(void);
-    // pair<T> back(void);
-    // pair<T> front(void);
-    // pair<T> popfront(void);
 
     void insertion(T num);
     void deletion(T num);
