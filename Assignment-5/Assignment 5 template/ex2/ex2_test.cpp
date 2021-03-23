@@ -224,6 +224,28 @@ int main(){
     test10.insertion(10.9);
     test10.print_all();
 
+    cout << "Type char: " << endl;
+    char input11[] = {'a', 'b', 'b', 'c', 'd', 'd', 'd'};
+    Mchaining<char> mc11(20);
+    for (auto i : input11){
+        mc11.insertion(i);
+    }
+    mc11.print_all();
+    cout << "Retrieval: " << endl;
+    mc11.retrieval('a');
+    mc11.retrieval('d');
+    mc11.retrieval('h');
+
+    cout << "Delete 'c':" << endl;
+    mc11.deletion('c');
+    mc11.print_all();
+
+    cout << "Insert 'a' 20 times: " << endl;
+    for (int i = 0; i < 20; i++){
+        mc11.insertion('a');
+    }
+    mc11.print_all();
+
     
 
     // Prof. Schewe told me that I do not need to implement the three functions below.
