@@ -66,7 +66,8 @@ int main(){
     mul2.deletion(12345);
     mul2.print_pairs();
 
-    double input3[] = {1.5, 1.5, 1.5, 2.1, 2.5, 3.5, 4000};
+    cout << "Test double and float type: " << endl;
+    double input3[] = {1.5, 1.5, 1.5, 2.1, 2.5, 3.5, 3.6, 3.6, 5.5, 5.5};
     double input4[] = {0, 2.5, 3.6, 3.6, 3.6, 3.6, 5.6, 5.5, 42};
 
     MultiSet<double> test3;
@@ -146,45 +147,99 @@ int main(){
     cout << endl;
     cout << "----------------------------------------------" << endl;
     cout << "MultiSet with Chaining: " << endl;
-    MChaining<int> mc1, mc2; 
-    int input5[] = {1, 1, 1, 5, 2, 3};
-    int input6[] = {1, 1, 6, 2, 100};
+    Mchaining<int> mc1(20);
+    int input5[] = {1, 1, 1, 5, 5, 2, 3};
     for (auto i: input5){
         mc1.insertion(i);
     }
-    for (auto i: input6){
-        mc2.insertion(i);
-    }
     cout << "Test 5: " << endl;
-    mc1.print_all();
-    cout << "Test 6: " << endl;
-    mc2.print_all();
-    mc1.deletion(1);
-    cout << "Delete 1: " << endl;
-    mc1.print_all();
-    mc1.insertion(1);
-    cout << "Insert 1: " << endl;
-    mc1.print_all();
-    cout << "Delete 15: " << endl;
-    mc1.deletion(15);
     mc1.print_all();
 
     cout << "Retrieval from test 5: " << endl;
     mc1.retrieval(20);
     mc1.retrieval(1);
-    mc1.retrieval(2);
-    MChaining<int> mc3, mc4, mc5;
+    mc1.retrieval(5);
 
-    cout << "Setunion of test 5 and test 6: " << endl;
-    mc3.setunion(&mc1, &mc2);
-    mc3.print_all();
+    cout << "Delete 2: " << endl;
+    mc1.deletion(2);
+    mc1.print_all();
+    cout << "Insert 1: " << endl;
+    mc1.insertion(1);
+    mc1.print_all();
+    cout << "Delete 15: " << endl;
+    mc1.deletion(15);
+    mc1.print_all();
+    cout << "Insert 1 for 20 times: " << endl;
+    for (int i = 0; i < 20; i++){
+        mc1.insertion(1);
+    }
+    mc1.print_all();
 
-    cout << "Intersection of test 5 and test 6: " << endl;
-    mc4.intersection(&mc1, &mc2);
-    mc4.print_all();
+    cout << "Delete 1 for 20 times: " << endl;
+    for (int i = 0; i < 20; i++){
+        mc1.deletion(1);
+    }
+    mc1.print_all();
 
-    cout << "Difference of test 5 and test 6: " << endl;
-    mc5.difference(&mc1, &mc2);
-    mc5.print_all();
+    double input9[] = {1.5, 1.5, 1.5, 2.1, 2.5, 3.5, 4000};
+    float input10[] = {0, 2.5, 3.6, 3.6, 3.6, 3.6, 5.6, 5.5, 42};
+
+    Mchaining<double> test9(20);
+    Mchaining<float> test10(20);
+    for(auto i: input9){
+        test9.insertion(i);
+    }
+    for(auto i: input10){
+        test10.insertion(i);
+    }
+    cout << "Test 9 Double: " << endl;
+    test9.print_all();
+    cout << "Test 10 Float: " << endl;
+    test10.print_all();
+
+    cout << "Retrieval from test 9: " << endl;
+    test9.retrieval(1.5);
+    test9.retrieval(2.1);
+    test9.retrieval(4000);
+    test9.retrieval(178329);
+    cout << "Retrieval from test 10: " << endl;
+    test10.retrieval(3.6);
+    test10.retrieval(5.5);
+    test10.retrieval(0);
+    test10.retrieval(178329);
+
+    cout << "Delete 1.5 from test 9: " << endl;
+    test9.deletion(1.5);
+    test9.print_all();
+
+    cout << "Insert 3.5 to test 9: " << endl;
+    test9.insertion(3.5);
+    test9.print_all();
+
+    cout << "Delete 3.6 from test 10: " << endl;
+    test10.deletion(3.6);
+    test10.print_all();
+
+    cout << "Insert 10.9 to test 10: " << endl;
+    test10.insertion(10.9);
+    test10.print_all();
+
+    
+
+    // Prof. Schewe told me that I do not need to implement the three functions below.
+
+    // MChaining<int> mc3, mc4, mc5;
+
+    // cout << "Setunion of test 5 and test 6: " << endl;
+    // mc3.setunion(&mc1, &mc2);
+    // mc3.print_all();
+
+    // cout << "Intersection of test 5 and test 6: " << endl;
+    // mc4.intersection(&mc1, &mc2);
+    // mc4.print_all();
+
+    // cout << "Difference of test 5 and test 6: " << endl;
+    // mc5.difference(&mc1, &mc2);
+    // mc5.print_all();
     return 0;
 }

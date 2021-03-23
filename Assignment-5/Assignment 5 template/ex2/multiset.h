@@ -1,75 +1,11 @@
 
 #ifndef _MULTISET_H_
 #define _MULTISET_H_
+#include <stdio.h>
+#include <iostream>
+#include <cstdlib>
+using std::hash;
 
-template<class T> class DList;
-
-template<class T> class node
-{
-    friend class DList<T>;
-public:
-    node(T item = 0, node<T> *pt_n = 0, node<T> *pt_p = 0);
-//    virtual ~node(void);
-    T getdata(void);
-    node<T> *getnext(void);
-    node<T> *getprevious(void);
-    void setdata(T item);    
-    void setnext(node<T> *pt);
-    void setprevious(node<T> *pt);
-private:
-    T dataitem;
-    node<T> *pt_next;
-    node<T> *pt_previous;
-};
-
-template<class T> class DList
-{
-public:
-    DList(void);
-//    virtual ~DList();
-    T operator[](int index);
-    int getlength(void);
-    void setitem(int index, T value);
-    T getitem(int index);
-    void append(T value);
-    void remove(int index);
-    
-private:
-    node<T> *dummy;
-    int numitems;
-    node<T> *first(void);
-    node<T> *last(void);
-    node<T> *locate(int index);
-   
-};
-
-
-template<class T> class MChaining
-{
-public:
-    MChaining(int size = 10);
-    virtual ~MChaining();
-    int getlength(void);
-    void print_all(void);
-    void pushback(DList<T> list1);
-  
-
-    void insertion(T num);
-    void deletion(T num);
-    int retrieval(T num);
-
-    void setunion(MChaining<T>* set1, MChaining<T>* set2);
-    void intersection(MChaining<T>* set1, MChaining<T>* set2);
-    void difference(MChaining<T>* set1, MChaining<T>* set2);
-    
-private:
-    int maxsize, minsize;
-    int first, last;
-    int numitems;
-    DList<T> *reprarray;
-    void allocate(void);
-    void deallocate(void);
-};
 
 
 template<class T> class pair{
@@ -125,4 +61,40 @@ private:
     void deallocate(void);
 };
 
+template<class T> class Node{
+    public:
+        Node<T>* next;
+        T key;
+    private:
+        
+};
+
+template<class T> class Llist{
+    friend class Node<T>;
+    public:
+        void getlength();
+    private:
+        int listitems;
+};
+
+template<class T> class Mchaining{
+    public:
+        Mchaining(int size);
+        hash<T> hashfunction;
+        void insertion(T num);
+        void deletion(T num);
+        int retrieval(T num);
+
+        void setunion(Mchaining<T>* set1, Mchaining<T>* set2);
+        void intersection(Mchaining<T>* set1, Mchaining<T>* set2);
+        void difference(Mchaining<T>* set1, Mchaining<T>* set2);
+
+        void rehash(int newsize);
+        void print_all();
+    private:
+        int numitems;
+        int maxsize;
+        Node<T>** reprarray;
+
+};
 #endif
