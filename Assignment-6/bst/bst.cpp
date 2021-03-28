@@ -145,7 +145,7 @@ template<class T> node<T> *BST<T>::_delete(node<T> *pt, T val)
         // get the left subtree and the right subtree. If either of them is not null, recursively call reinsert until we reach the leaf node
         if (NULL != ltree){
             node<T>* ptr;
-            for (ptr = rtree; NULL != ptr->getright(); ptr = ptr->getright()){
+            for (ptr = rtree; NULL != ptr->getleft(); ptr = ptr->getleft()){
             }
             ptr->setleft(ltree);
         }
