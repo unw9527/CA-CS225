@@ -112,7 +112,6 @@ int main()
 
     // below are the tests I used to debug.
 
-    // int k = 2;
     // BST<int> mytree1 = BST<int>();
     // for (int i = 1; i < 7; i++){
     //     mytree1.insert(i);
@@ -159,5 +158,21 @@ int main()
     // cout << "Delete 4: " << endl;
     // mytree2.remove(4);
     // mytree2.display();
-    return(0);
+
+    // BST<int> mytree3 = BST<int>();
+    // mytree3.insert(3);
+    // mytree3.insert(6);
+    // mytree3.insert(8);
+    // mytree3.insert(10);
+    // mytree3.insert(7);
+    // mytree3.insert(5);
+    // mytree3.insert(2);
+    // mytree3.insert(9);
+    // mytree3.insert(4);
+    // mytree3.insert(13);
+    // mytree3.insert(11);
+    // mytree3.display();
+    // mytree3.remove(6);
+    // mytree3.display();
+    return 0;
 }

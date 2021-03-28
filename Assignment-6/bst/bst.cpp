@@ -134,6 +134,8 @@ template<class T> node<T> *BST<T>::_delete(node<T> *pt, T val)
         // pt_new = merge((*pt).getleft(), (*pt).getright());
         node<T>* ltree = pt->getleft();
         node<T>* rtree = pt->getright();
+        pt->setleft(NULL);
+        pt->setright(NULL);
         if (NULL != ltree){
             reinsert(ltree);
         }
@@ -141,14 +143,16 @@ template<class T> node<T> *BST<T>::_delete(node<T> *pt, T val)
             reinsert(rtree);
         }
         // get the left subtree and the right subtree. If either of them is not null, recursively call reinsert until we reach the leaf node
-        if (NULL != pt->getleft()){
-            pt_new = pt->getleft(); 
+        if (NULL != ltree){
+            node<T>* ptr;
+            for (ptr = rtree; NULL != ptr->getright(); ptr = ptr->getright()){
+            }
+            ptr->setleft(ltree);
         }
-        if (NULL != pt->getright()){
-            pt_new = pt->getright();
+        if (NULL != rtree){
+            pt_new = rtree;
         }
-        // set pt_new to a non-null child of pt 
-        if (NULL == pt->getleft() && NULL == pt->getright()){
+        if (NULL == ltree && NULL == rtree){
             pt_new = 0; // if pt has no children, which means we want to delete a leaf node, then we set pt_new to 0
         }
         return pt_new;
