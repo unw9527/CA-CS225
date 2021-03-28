@@ -60,6 +60,7 @@ template<class T> void node<T>::setright(node<T> *pt)
 template<class T> BST<T>::BST(void)
 {
     root = 0;
+    pp = root;
 }
 
 /* the insert, delete and find functions are realised recursively starting from the root using the corresponding auxiliary functions */
@@ -72,8 +73,15 @@ template<class T> void BST<T>::insert(T item)
 template<class T> void BST<T>::remove(T item)
 {
     root = _delete(root, item);
-    // root = 0;
-    // _delete(0, item);
+    node<T>* ltree = pp->getleft();
+    node<T>* rtree = pp->getright();
+    // recursively insert all element in the subtree
+    if (NULL != ltree){
+        reinsert(ltree);
+    }
+    if (NULL != rtree){
+        reinsert(rtree);
+    }
     return;
 }
 
@@ -108,9 +116,11 @@ template<class T> node<T> *BST<T>::_insert(node<T> *pt, T val)
     return pt;
 }
 
+// here is the function I define to recursively re-insert all elements in the subtree
 template<class T> void BST<T>::reinsert(node<T>* ptr){
     node<T>* ltree = ptr->getleft(); 
     node<T>* rtree = ptr->getright();
+    
     // get the left subtree and the right subtree. If either of them is not null, recursively call reinsert until we reach the leaf node
     if (NULL != ltree){
         reinsert(ltree);
@@ -119,8 +129,8 @@ template<class T> void BST<T>::reinsert(node<T>* ptr){
         reinsert(rtree);
     }
     insert(ptr->getdata()); // if we reach the leaf node, insert the data of the leaf node back to the BST as the question required
-    
 }
+
 
 template<class T> node<T> *BST<T>::_delete(node<T> *pt, T val)
 {
@@ -132,30 +142,25 @@ template<class T> node<T> *BST<T>::_delete(node<T> *pt, T val)
     if ((*pt).getdata() == val)
     {
         // pt_new = merge((*pt).getleft(), (*pt).getright());
-        node<T>* ltree = pt->getleft();
-        node<T>* rtree = pt->getright();
-        pt->setleft(NULL);
-        pt->setright(NULL);
-        if (NULL != ltree){
-            reinsert(ltree);
-        }
-        if (NULL != rtree){
-            reinsert(rtree);
-        }
-        // get the left subtree and the right subtree. If either of them is not null, recursively call reinsert until we reach the leaf node
-        if (NULL != ltree){
-            node<T>* ptr;
-            for (ptr = rtree; NULL != ptr->getleft(); ptr = ptr->getleft()){
-            }
-            ptr->setleft(ltree);
-        }
-        if (NULL != rtree){
-            pt_new = rtree;
-        }
-        if (NULL == ltree && NULL == rtree){
-            pt_new = 0; // if pt has no children, which means we want to delete a leaf node, then we set pt_new to 0
-        }
-        return pt_new;
+        pp = pt; // set pp to pt to record the location of the subtree.
+        return 0; // let the parent of this node point to null
+
+        // Below is the code for debugging. Please ignore.
+
+        // if ltree is not NULL, insert 
+        // if (NULL != ltree){
+        //     node<T>* ptr;
+        //     for (ptr = rtree; NULL != ptr->getleft(); ptr = ptr->getleft()){
+        //     }
+        //     ptr->setleft(ltree);
+        // }
+        // if (NULL != rtree){
+        //     pt_new = rtree;
+        // }
+        // if (NULL == ltree && NULL == rtree){
+        //     pt_new = 0; // if pt has no children, which means we want to delete a leaf node, then we set pt_new to 0
+        // }
+        // return pt_new;
     }
     /* The recursive descent follows the left subtree or the right subtree. The call of _delete returns a pointer to the root of the modified tree. This must be returned and stored in the position (left or right) that issued the call.*/
     if (val < (*pt).getdata())

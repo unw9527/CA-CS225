@@ -110,7 +110,7 @@ int main()
     }
     while (op != 0);
 
-    // below are the tests I used to debug.
+    // Below are the tests I used for debugging.
 
     // BST<int> mytree1 = BST<int>();
     // for (int i = 1; i < 7; i++){

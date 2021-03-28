@@ -40,6 +40,7 @@ public:
     void reinsert(node<T>* ptr); // here I define a recursive function to reinsert all elements rooted at the element we want to delete
 private:
     node<T> *root;
+    node<T>* pp; // define pp to record where the subtree is
     /* _insert, _delete and _find are auxiliary functions to navigate recursively through the BST for insert, delete and find */
     node<T> *_insert(node<T> *pt, T val);
     node<T> *_delete(node<T> *pt, T val);
