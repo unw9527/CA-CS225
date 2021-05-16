@@ -7,23 +7,28 @@
 #include "ex1ex2.h"
 using namespace std;
 
+/* This series of file is the solution about the exercise 1 and 2.*/
+/* In the corresponding header file, we include the definition of a new class patient and its constructor, 
+	as well as two global variables used for distributing id. 
+	This file includes the function implementation of the class patient and local queue. */
 
 
 // Class Functions
-void patient::age_rank(int year_now) {
-	int diff = year_now - this->birth;
+void patient::age_rank() {
+	int diff = 2021 - this->birth;
 	if (diff <= 12) {this->aging = 12;}
 	else if (diff <= 18) {this->aging = 18;}
 	else if (diff <= 35) {this->aging = 35;}
 	else if (diff <= 50) {this->aging = 50;}
 	else if (diff <= 65) {this->aging = 65;}
 	else if (diff <= 75) {this->aging = 75;}
-	else if (diff > 75) {this->aging = 76;}  //年龄段我是采用了12,18,等分隔线；也可改用1,2,3等表示年龄段 
+	else if (diff > 75) {this->aging = 76;}  //we use number to represent agings 
 }
 
 
 // Other Funtions
-localQ<patient*> build_queue(int i) {  // Build a list of patients in one txt file.
+// input : int i -- the number of data csv file we want to open. e.g. if input is 1, we open "data1.csv"
+inline localQ<patient*> build_queue(int i) {  // Build a queue of patients from one csv file.
 	localQ<patient*> palist;
 	ifstream pafile;
     char filename[30] = {0};
@@ -50,7 +55,14 @@ localQ<patient*> build_queue(int i) {  // Build a list of patients in one txt fi
 				item++;
 				switch (item) {  // You can refer to the order in the sample csv.
 					case 1:
-						ill->id=(int)strtol(buf,NULL,10);
+						/*ill->id=(int)strtol(buf,NULL,10);*/
+						if (buf[0]=='\0') {
+							delete ill;
+							ill=nullptr; 
+							item=-2;
+							break;
+						}
+						ill->id=len_N;  // Set the id as the index of the array N.
 						break;
 					case 2:
 						strcpy(ill->name,buf);
@@ -59,30 +71,40 @@ localQ<patient*> build_queue(int i) {  // Build a list of patients in one txt fi
 						ill->prof=(int)strtol(buf,NULL,10);
 						break;
 					case 4:
-						strcpy(ill->time,buf);
+						ill->time=(int)strtol(buf,NULL,10);
 						break; 
 					case 5:
 						ill->risk=(int)strtol(buf,NULL,10);
-						break; 
-					case 8:
-						strcpy(ill->status,buf);
 						break;
 					case 6:
 						ill->contact=(int)strtol(buf,NULL,10);
 						break;
 					case 7:
-						ill->birth=(int)strtol(buf,NULL,10);
+                        ill->ddl=(int)strtol(buf,NULL,10);
+                        break; 
+                    case 8:
+						ill->closest=(int)strtol(buf,NULL,10);
+						break; 
+                    case 9:
+                        ill->birth=(int)strtol(buf,NULL,10);
+						char buf[64];
+						pafile.getline(buf,64,'\n');  // This is because the end of each line in csv is still '\n' rather than ','
+						while (buf[0]=='\n'){
+							strcpy(buf, buf+1);  // Delete the "\n"(s) at the front of buf.
+						}
+						strcpy(ill->status,buf);
 						item=-1;
 						break;
 					default:
-						cout << "Wrong with switch!\n";
+						cout << "Wrong order!\n";
 				}
 				if (item==-1) {  // Set to -1 in order to jump out of the while loop and set a new patient* ill.
-					ill->age_rank(2021);  // This number can be changed if initially the year number is not 2021.
+					ill->age_rank();
+					N[len_N++]=ill; 
 					palist.pushback(ill);  // This pointer to this patient is stored to the vector palist.
 					continue;
 				}
-			}	
+			}		
 		}
 	} else {
 		cout << "File open failure!\n";
@@ -109,7 +131,7 @@ template<class T> localQ<T>::localQ(int size)
 
 template<class T> T &localQ<T>::operator[](int index)
 {
-    if ((1 <= index) && (index <= numitems))
+    if ((0 <= index) && (index <= numitems))
     {
         int relindex = (index + first -1) % maxsize;
         return reprarray[relindex];
@@ -222,24 +244,6 @@ template<class T> void localQ<T>::deallocate(void)
 }
 
 
-// Main program
-int main() {
-    cout << "test for local queue 1: " << endl;
-	localQ<patient*> palist1;
-    palist1 = build_queue(1);
-	patient* fst = palist1.front();
-	cout << fst->risk << ' ' << fst->prof << "\n";
 
-    cout << "test for local queue 2: " << endl;
-    localQ<patient*> palist2;
-    palist2 = build_queue(2);
-    fst = palist2.front();
-	cout << fst->risk << ' ' << fst->prof << "\n";
 
-    cout << "test for local queue 3: " << endl;
-    localQ<patient*> palist3;
-    palist3 = build_queue(3);
-    fst = palist3.front();
-	cout << fst->risk << ' ' << fst->prof << "\n";
-	return 0;
-}
+

@@ -4,6 +4,9 @@
 #include <string.h>
 using namespace std;
 
+#ifndef ex1ex2_h
+#define ex1ex2_h
+
 // below is the template for local queue
 class patient;
 template<class T> class localQ
@@ -30,7 +33,7 @@ template<class T> class localQ
 		void deallocate(void);
 };
 
-class patient {
+class patient {///
 	public:
 		/* Class Members */
 		// All arrays allow change in length. */
@@ -40,23 +43,89 @@ class patient {
 		int prof;  // Here we use int from 1 to 8. You can let number order represent priority.
 		int birth;  // 4 digit always, only the year.
 		int risk;  // Here we use int from 0 to 3, as shown in the pdf.
-		char time[15];  // 14 digits always, in the form yyyy-mm-dd-hh-mm-ss.
+		int time;  // 5 digits, in the form mm-dd-(0==am or 1==pm).
 		int aging;  // Store the group that one person should be in w.r.t their age. This is essential for second priority.
-		patient* prev;
-		patient* next;  // Used to build fibonacci heap.
 		char status[10];  // applied, waiting, allocated, completed or withdrawn. 
 		
+		int ddl; // the time before which the patient with a priority letter must be treated
+		int closest;  // indicate the closest hospital of one patient
+		
 		/* Class Functions */
-		patient(); 
+		patient();
+		patient(int nid, char nam[30], int pro, int tim, int ris, int phone, int bir, char state[10]);
 		  //~patient();
-		void age_rank(int year_now);
-	
+		void age_rank();
+		patient* left;
+		patient* right;
+		patient* parent;
+		patient* child;
+		bool marked;
+		int degree;
 };
 
 
+// Global variables
+patient* N[1000];
+int len_N=0; 
+
+
 patient::patient(){
-	this->prev=NULL;
-	this->next=NULL;
+	left = nullptr;
+	right = nullptr;
+	parent = nullptr;
+	child = nullptr;
+	marked = 0;
+	degree = 0;
 }
 
+patient::patient(int nid, char nam[30], int pro, int tim, int ris, int phone, int bir, char state[10]) {
+	this->id=nid;
+	strcpy(this->name,nam);
+	this->prof=pro;
+	this->time=tim;
+	this->risk=ris;
+	this->contact=phone;
+	this->birth=bir;
+	strcpy(this->status,state);
+	
+	N[len_N++]=this;  // Put the pointer into the global array.
+	left = nullptr;
+	right = nullptr;
+	parent = nullptr;
+	child = nullptr;
+	marked = 0;
+	degree = 0;
+};
+#endif
+/*
+#ifndef f_h
+#define f_h
 
+template<class T> class F_h;
+
+
+template<class T> class F_h
+{
+public:
+    F_h(void);
+    int n;
+    patient *min;
+    int degree;
+    void insert(patient* p);
+    void brother(patient* p1,patient* p2);
+    void delete(patient* p);
+    patient* extract_min();
+    patient* parent_child(patient* p1,patient* p2);
+    void consolidate();
+    void decrease_key(patient* p, int k, int case);
+    void cascading_cut(patient* p);
+}
+F_h::F_h(){
+    min=new node;
+    min=nullptr;
+    n=0;
+}
+
+#endif
+
+*/
